@@ -213,12 +213,25 @@ namespace AssetStudio
                 sum = end;
             }
             #endregion
-
+            
+            #region Materal    
+            for (var i = 0; i < m_materialIDs; i++)
+            {
+                sb.AppendLine($"usemtl {m_materialIDs}_{i}");
+                sb.AppendLine($"mtllib {m_materialIDs}_{i}");
+            }
+            #endregion
+            
             sb.Replace("NaN", "0");
             File.WriteAllText(exportFullName, sb.ToString());
             return true;
         }
 
+        public static bool ExportMaterial(AssetPreloadData asset, string exportPath)
+        {
+            var m_Shader = new Shader(asset);
+        }
+        
         public static bool ExportVideoClip(AssetPreloadData asset, string exportPath)
         {
             var m_VideoClip = new VideoClip(asset, true);
